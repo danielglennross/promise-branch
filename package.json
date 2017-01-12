@@ -1,0 +1,29 @@
+{
+  "name": "promise-branch",
+  "version": "1.0.0",
+  "description": "Allows isolated branching of promise flows",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha -R spec ./test/index.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielglennross/promise-branch.git"
+  },
+  "keywords": [
+    "promise-branch"
+  ],
+  "author": "daniel ross",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^2.9.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.7.0",
+    "mocha": "^3.2.0"
+  },
+  "bugs": {
+    "url": "https://github.com/danielglennross/promise-branch/issues"
+  },
+  "homepage": "https://github.com/danielglennross/promise-branch#readme"
+}
