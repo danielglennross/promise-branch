@@ -8,9 +8,31 @@ const branch = require('../lib');
 
 describe('promise branch', () => {
 
+  it('should allow a promise to be passed as the target', done => {
+    branch(Promise.resolve(),
+      () => Promise.resolve('targetResolved'),
+      () => Promise.resolve('targetRejected')
+    )
+    .then(data => {
+      expect(data).to.equal('targetResolved');
+      done();
+    });
+  });
+
+  it('should allow a promise factory to be passed as the target', done => {
+    branch(() => Promise.resolve(),
+      () => Promise.resolve('targetResolved'),
+      () => Promise.resolve('targetRejected')
+    )
+    .then(data => {
+      expect(data).to.equal('targetResolved');
+      done();
+    });
+  });
+
   it('should not handle any existing rejected promises', done => {
     Promise.reject(new Error('existing'))
-    .then(() => branch(() => Promise.resolve(),
+    .then(() => branch(Promise.resolve(),
       () => Promise.resolve('targetResolved'),
       () => Promise.resolve('targetRejected')
     ))
@@ -22,7 +44,7 @@ describe('promise branch', () => {
 
   it('should call onResolved handler on a resolved target', done => {
     Promise.resolve()
-    .then(() => branch(() => Promise.resolve(),
+    .then(() => branch(Promise.resolve(),
       () => Promise.resolve('targetResolved'),
       () => Promise.resolve('targetRejected')
     ))
@@ -34,7 +56,7 @@ describe('promise branch', () => {
 
   it('should call onRejected handler on a rejected target', done => {
     Promise.resolve()
-    .then(() => branch(() => Promise.reject('branchError'),
+    .then(() => branch(Promise.reject('branchError'),
       () => Promise.resolve('targetResolved'),
       () => Promise.resolve('targetRejected')
     ))
@@ -46,7 +68,7 @@ describe('promise branch', () => {
 
   it('should not handle error in down chain catch on a rejected target', done => {
     Promise.resolve()
-    .then(() => branch(() => Promise.reject('branchError'),
+    .then(() => branch(Promise.reject('branchError'),
       () => Promise.resolve('targetResolved'),
       () => Promise.resolve('targetRejected')
     ))
@@ -61,7 +83,7 @@ describe('promise branch', () => {
 
   it('should allow a rejected promise to be handled down chain on a rejected onResolved handler', done => {
     Promise.resolve()
-    .then(() => branch(() => Promise.resolve(),
+    .then(() => branch(Promise.resolve(),
       () => Promise.reject(new Error('oops')),
       () => Promise.resolve()
     ))
@@ -73,7 +95,7 @@ describe('promise branch', () => {
 
   it('should allow a rejected promise to be handled down chain on a rejected onRejected handler', done => {
     Promise.resolve()
-    .then(() => branch(() => Promise.reject(),
+    .then(() => branch(Promise.reject(),
       () => Promise.resolve(),
       () => Promise.reject(new Error('oops'))
     ))
