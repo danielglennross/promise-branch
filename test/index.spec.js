@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const chai = require('chai');
 const expect = chai.expect;
@@ -72,10 +72,10 @@ describe('promise branch', () => {
       () => Promise.resolve('targetResolved'),
       () => Promise.resolve('targetRejected')
     ))
-    .catch(err => {
+    .catch(() => {
       assert(false);
     })
-    .then(data => {
+    .then(() => {
       assert(true);
       done();
     });
