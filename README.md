@@ -2,7 +2,7 @@
 Allows isolated branching of promise flows.
 
 This lib helps to address some of the issues raised by: 
-[Broken Promises](https://github.com/cloudflare/cf-ui/blob/master/discussions/broken-promises.md)
+[Broken Promises](https://github.com/cloudflare/cf-ui/blob/6aec707d1efeceda121767b079c1d03a92369fc9/discussions/broken-promises.md)
 
 ## Install
 `npm install --save promise-branch`
